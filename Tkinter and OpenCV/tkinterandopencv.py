@@ -8,7 +8,7 @@ class App:
         self.window.title(window_title)
         self.video_source = video_source
         self.vid = MyVideoCapture(self.video_source)
-        self.canvas = tkinter.Canvas(window, width = self.vid.width, height = self.vid.height)
+        self.canvas = tkinter.Canvas(window, width = 1150, height = 680)
         self.canvas.pack()
         self.btn_snapshot=tkinter.Button(window, text="Snapshot", width=50, command=self.snapshot)
         self.btn_snapshot.pack(anchor=tkinter.CENTER, expand=True)
