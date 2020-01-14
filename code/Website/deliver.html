@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Delivery</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://smtpjs.com/v3/smtp.js"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.6.2/firebase.js"></script>
+    <!-- <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-auth.js"></script> -->
+    <!-- <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-database.js"></script> -->
+</head>
+<body>
+    
+<center><h1>Delivery</h1></center>
+<center><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Terms and Condition</button>
+</center>
+<!-- Trigger the modal with a button -->
+<hr>
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog">
+  
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Terms and Condition</h4>
+      </div>
+      <div class="modal-body">
+        <p>Terms and Condition <br>The provisions of these General Terms and Conditions apply as the standard contract conditions which are used in a contract with a merchant in the normal course of business. In accepting an offer or order confirmation or by sending a purchase order, the customer (hereafter called the Purchaser) confirms his acceptance of these General Terms and Conditions of Sale and Delivery.  Contradictory terms and conditions laid down by the Purchaser will not be binding upon Phaesun GmbH and its subsidiary Phaesun France SAS (hereafter collectively called the Seller), even if no specific objections are raised by the Seller, The services, deliveries and offers of the Seller are carried out exclusively on the basis of these Terms and Conditions of the Seller. These thus also apply to all future business relations, even if they are not explicitly agreed upon again. These Terms and Conditions are taken as accepted at the latest when the product or service is received.</p>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+    
+  </div>
+</div>
+
+</div>
+<div class="tab">
+  <button class="tablinks" onclick="openCity(event, 'London')">London</button>
+  <button class="tablinks" onclick="openCity(event, 'Paris')">Paris</button>
+  <button class="tablinks" onclick="openCity(event, 'Tokyo')">OTP Generation</button>
+</div>
+
+<div id="London" class="tabcontent">
+  <h3>London</h3>
+  <p>London is the capital city of England.</p>
+</div>
+
+<div id="Paris" class="tabcontent">
+  <h3>Paris</h3>
+  <p>Paris is the capital of France.</p> 
+</div>
+
+<div id="Tokyo" class="tabcontent">
+  <h2>Generate OTP for the user</h2>
+  <div id="wrapper">
+    <div id="dialog">
+      
+      <h3>Please enter the 4-digit verification code we sent via EMail:</h3>
+      <span>(we want to make sure it's you before we contact our movers)</span>
+      <div id="form">
+        <input type="text" maxLength="1" size="1" id="one" min="0" max="9" pattern="[0-9]{1}" /><input type="text"  maxLength="1" size="1" id="two" min="0" max="9" pattern="[0-9]{1}" /><input type="text" maxLength="1" size="1" id="three" min="0" max="9" pattern="[0-9]{1}" /><input type="text" maxLength="1" size="1" id="four" min="0" max="9" pattern="[0-9]{1}" />
+        <button class="btn btn-primary btn-embossed" onclick="generateOTP()">Generate OTP</button>
+        <button class="btn btn-primary btn-embossed" onclick="addFirebase()">Verify</button>
+        <button class="btn btn-primary btn-embossed" onclick="sendSMS()">Mail OTP</button>
+      </div>
+  
+      <div>
+        Didn't receive the code?<br />
+        <a href="#" onclick="sendSMS()">Send code again</a><br />
+      </div>
+      <!-- <img src="http://jira.moovooz.com/secure/attachment/10424/VmVyaWZpY2F0aW9uLnN2Zw==" alt="test" /> -->
+    </div>
+  </div>
+
+
+
+</div>
+
+</body>
+<style>
+    #wrapper {
+  font-family: Lato;
+  font-size: 1.5rem;
+  text-align: center;
+  box-sizing: border-box;
+  color: #333;
+}
+#wrapper #dialog {
+  border: solid 1px #ccc;
+  margin: 10px auto;
+  padding: 20px 30px;
+  display: inline-block;
+  box-shadow: 0 0 4px #ccc;
+  background-color: #faf8f8;
+  overflow: hidden;
+  position: relative;
+  max-width: 450px;
+}
+#wrapper #dialog h3 {
+  margin: 0 0 10px;
+  padding: 0;
+  line-height: 1.25;
+}
+#wrapper #dialog span {
+  font-size: 90%;
+}
+#wrapper #dialog #form {
+  max-width: 240px;
+  margin: 25px auto 0;
+}
+#wrapper #dialog #form input {
+  margin: 0 5px;
+  text-align: center;
+  line-height: 80px;
+  font-size: 50px;
+  border: solid 1px #ccc;
+  box-shadow: 0 0 5px #ccc inset;
+  outline: none;
+  width: 20%;
+  transition: all 0.2s ease-in-out;
+  border-radius: 3px;
+}
+#wrapper #dialog #form input:focus {
+  border-color: purple;
+  box-shadow: 0 0 5px purple inset;
+}
+#wrapper #dialog #form input::-moz-selection {
+  background: transparent;
+}
+#wrapper #dialog #form input::selection {
+  background: transparent;
+}
+#wrapper #dialog #form button {
+  margin: 30px 0 50px;
+  width: 100%;
+  padding: 6px;
+  background-color: #b85fc6;
+  border: none;
+  text-transform: uppercase;
+}
+#wrapper #dialog button.close {
+  border: solid 2px;
+  border-radius: 30px;
+  line-height: 19px;
+  font-size: 120%;
+  width: 22px;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+}
+#wrapper #dialog div {
+  position: relative;
+  z-index: 1;
+}
+#wrapper #dialog img {
+  position: absolute;
+  bottom: -70px;
+  right: -63px;
+}
+
+    body {font-family: Arial;}
+    
+    /* Style the tab */
+    .tab {
+      overflow: hidden;
+      border: 1px solid #ccc;
+      background-color: #f1f1f1;
+    }
+    
+    /* Style the buttons inside the tab */
+    .tab button {
+      background-color: inherit;
+      float: left;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      padding: 14px 16px;
+      transition: 0.3s;
+      font-size: 17px;
+    }
+    
+    /* Change background color of buttons on hover */
+    .tab button:hover {
+      background-color: #ddd;
+    }
+    
+    /* Create an active/current tablink class */
+    .tab button.active {
+      background-color: #ccc;
+    }
+    
+    /* Style the tab content */
+    .tabcontent {
+      display: none;
+      padding: 6px 12px;
+      border: 1px solid #ccc;
+      border-top: none;
+    }
+    </style>
+<script type="text/javascript">
+function openCity(evt, cityName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+
+
+$(function() {
+  'use strict';
+
+  var body = $('body');
+
+  function goToNextInput(e) {
+    var key = e.which,
+      t = $(e.target),
+      sib = t.next('input');
+
+    if (key != 9 && (key < 48 || key > 57)) {
+      e.preventDefault();
+      return false;
+    }
+
+    if (key === 9) {
+      return true;
+    }
+
+    if (!sib || !sib.length) {
+      sib = body.find('input').eq(0);
+    }
+    sib.select().focus();
+  }
+
+  function onKeyDown(e) {
+    var key = e.which;
+
+    if (key === 9 || (key >= 48 && key <= 57)) {
+      return true;
+    }
+
+    e.preventDefault();
+    return false;
+  }
+  
+  function onFocus(e) {
+    $(e.target).select();
+  }
+
+  body.on('keyup', 'input', goToNextInput);
+  body.on('keydown', 'input', onKeyDown);
+  body.on('click', 'input', onFocus);
+
+})
+
+
+function sendSMS(){
+    var one = document.getElementById('one').value;
+    var two = document.getElementById('two').value;
+    var three = document.getElementById('three').value;
+    var four = document.getElementById('four').value;
+    var otp = one.toString()+two.toString()+three.toString()+four.toString();
+    var database_otp = otp;
+    var uname = localStorage.getItem("uname");
+    var uemail = localStorage.getItem("email");
+    //alert(otp);
+    var send = '<h3>Hi'+uname+', </h3><br><p>your totally secure one time password, which was sent to you over an unencryted media,<h2>'+otp+'</h2></p> <br><i>Disclaimer: Please do not print this email. Save the environment.If this email was not ment for you - since you are the hacker - please inform the sender and destroy this email!</i>'
+    Email.send({
+	Host: "smtp.nualfas.com",
+	Username : "aman@nualfas.com",
+	Password : "Amanulla@1234",
+	To : uemail,
+	From : "aman@nualfas.com",
+	Subject : "OTP for Delivery",
+	Body : send,
+	}).then(
+		message => Swal.fire(
+  'Success!',
+  'OTP was successfully sent!',
+  'success'
+)
+    );
+    
+
+
+
+}
+
+function generateOTP(){
+    var val = Math.floor(1000 + Math.random() * 9000);
+    var otp = val.toString();
+    var otps = [0316,5764,4382,2838,2412,3987,1972,1172,4693,3214,5111,3531,7314,2912,5825,9717,6437,4075,0771,4202];
+    document.getElementById('one').value = otp.charAt(3);
+    document.getElementById('two').value = otp.charAt(2);
+    document.getElementById('three').value = otp.charAt(1);
+    document.getElementById('four').value = otp.charAt(0);
+}
+
+function addFirebase(){
+    var one = document.getElementById('one').value;
+    var two = document.getElementById('two').value;
+    var three = document.getElementById('three').value;
+    var four = document.getElementById('four').value;
+    var otp = one.toString()+two.toString()+three.toString()+four.toString();
+    var database_otp = otp;
+    var uid = localStorage.getItem("uid");
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyB4PhVUSz0L9PNgC_eORqwicmBKBkqan1U",
+    authDomain: "authentication-3bb95.firebaseapp.com",
+    databaseURL: "https://authentication-3bb95.firebaseio.com",
+    projectId: "authentication-3bb95",
+    storageBucket: "authentication-3bb95.appspot.com",
+    messagingSenderId: "836105304845",
+    appId: "1:836105304845:web:60614fb592af4f1b97ce44"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+    // Get a reference to the database service
+   firebase.database().ref().set({
+    uid:parseInt(uid),
+    otp:parseInt(database_otp)
+   });
+
+
+
+
+
+}
+
+</script>
+</html>

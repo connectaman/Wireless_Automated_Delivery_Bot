@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<style>
+.row {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: auto;
+  margin: 0px 50px 10px 50px;
+  text-align: center;
+  font-family: arial;
+  padding: 20px 20px 20px 20px;
+  background-color: #f1f0ef;
+}
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 250px;
+  margin: auto;
+  text-align: center;
+  font-family: arial;
+}
+
+.title {
+  color: grey;
+  font-size: 18px;
+}
+
+button {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+a {
+  text-decoration: none;
+  font-size: 22px;
+  color: black;
+}
+
+button:hover, a:hover {
+  opacity: 0.7;
+}
+
+.user-img{
+    max-width: 100%;
+    max-height: 100%;
+}
+.delivery{
+    margin-top: 20%;
+    max-width: 85%;
+    text-align: center;
+}
+</style>
+</head>
+<body>
+
+<h2 style="text-align:center">Delivery List</h2><br>
+
+
+<div class="container">
+    <!--#1-->
+
+    <div class="row">
+            <div class="col-lg-4 col-md-4">
+            <!-- <div class="card"> -->
+                <h4>User ID: 4455</h4>
+                <h3>Name: Rahul</h3>
+                <h5>Email: akashprajasekharan@gmail.com</h5>
+                <h5>Phone No: 7825646320</h5>
+                <Address>Address: 145, 4th Cross, Vijaynagar, Bangalore-560060</Address>
+            <!-- </div> -->
+      </div>
+      <div class="col-lg-4 col-md-4">
+          <h3>Product Details</h3>
+          <p>Item: Apple iphone X</p>
+          <h5>Delivery Address:</h5>
+          <p>145, 4th Cross, Vijaynagar, Bangalore-560060</p>
+          <div class="delivery">
+              <button type="button" class="btn btn-success" onclick="deliveryOne()">Deliver Product</button>
+          </div>
+      </div>
+      <div class="col-lg-4 col-md-4">
+        <div class="card">
+            <img class="user-img" src="https://middle.pngfans.com/20190702/pi/user-img-png-computer-icons-user-clipart-e4e59fcbe65f8784.jpg" alt="John" style="width:100%">
+            
+            
+            
+            <p><button>Rahul</button></p>
+          </div>
+        
+    </div>
+    </div>
+<!--#2-->
+
+
+    <div class="row">
+        <div class="col-lg-4 col-md-4">
+        <!-- <div class="card"> -->
+          <h4>User ID: 6652</h4>
+          <h3>Name: Suresh</h3>
+          <h5>Email: winwithaman@gmail.com</h5>
+          <h5>Phone No: 8165723478</h5>
+          <Address>75, 9th Cross, 2nd Main, Banashankari 3rd Stage, Bangalore-560085</Address>
+        <!-- </div> -->
+  </div>
+  <div class="col-lg-4 col-md-4">
+      <h3>Product Details</h3>
+      <p>Item: MI Power Bank</p>
+      <h5>Delivery Address:</h5>
+      <p>75, 9th Cross, 2nd Main, Banashankari 3rd Stage, Bangalore-560085</p>
+      <div class="delivery">
+          <button type="button" class="btn btn-success" onclick="deliveryTwo()">Deliver Product</button>
+      </div>
+  </div>
+  <div class="col-lg-4 col-md-4">
+    <div class="card">
+        <img class="user-img" src="https://brsnc.in/img/teacher.png" alt="John" style="width:100%">
+        
+        
+        
+        <p><button>Suresh</button></p>
+      </div>
+    
+</div>
+</div>
+<!--#3-->
+
+<div class="row">
+    <div class="col-lg-4 col-md-4">
+    <!-- <div class="card"> -->
+      <h4>User ID: 4455</h4>
+      <h3>Name: Lokesh</h3>
+      <h5>Email: connectamanulla@gmail.com</h5>
+      <h5>Phone No: 6363578861</h5>
+      <Address>Address: 102 1st floor, Square Apartment, Bangalore-560063</Address>
+    <!-- </div> -->
+</div>
+<div class="col-lg-4 col-md-4">
+  <h3>Product Details</h3>
+  <p>Item: UBS Cable</p>
+  <h5>Delivery Address:</h5>
+  <p>102 1st floor, Square Apartment, Bangalore-560063</p>
+  <div class="delivery">
+      <button type="button" class="btn btn-success" onclick="deliveryThree()">Deliver Product</button>
+  </div>
+</div>
+<div class="col-lg-4 col-md-4">
+<div class="card">
+    <img class="user-img" src="https://www.w3schools.com/howto/img_avatar.png" alt="John" style="width:100%">
+    
+    
+    
+    <p><button>Ramesh</button></p>
+  </div>
+
+</div>
+</div>
+<!--#4-->
+
+<div class="row">
+    <div class="col-lg-4 col-md-4">
+    <!-- <div class="card"> -->
+      <h4>User ID: 9785</h4>
+      <h3>Name: Lokesh</h3>
+      <h5>Email: connectakashpr@gmail.com</h5>
+      <h5>Phone No: 9620128963</h5>
+      <Address>Address: 24, 1st Block, Shivaginagar, Bangalore-560060</Address>
+    <!-- </div> -->
+</div>
+<div class="col-lg-4 col-md-4">
+  <h3>Product Details</h3>
+  <p>Item: BOAT Bluetooth Earphones</p>
+  <h5>Delivery Address:</h5>
+  <p>24, 1st Block, Shivaginagar, Bangalore-560060</p>
+  <div class="delivery">
+      <button type="button" class="btn btn-success" onclick="deliveryFour()">Deliver Product</button>
+  </div>
+</div>
+<div class="col-lg-4 col-md-4">
+<div class="card">
+    <img class="user-img" src="https://www.pngkey.com/png/detail/114-1149878_setting-user-avatar-in-specific-size-without-breaking.png" alt="John" style="width:100%">
+    
+    
+    
+    <p><button>Lokesh</button></p>
+  </div>
+
+</div>
+</div>
+
+    </div>
+
+
+    
+
+</body>
+
+<script>
+function deliveryOne(){
+  localStorage.setItem("uid", "4455");
+  localStorage.setItem("uname","Rahul");
+  localStorage.setItem("email","akashprajasekharan@gmail.com");
+  localStorage.setItem("phoneno","7825646320");
+  localStorage.setItem("address","145, 4th Cross, Vijaynagar, Bangalore-560060");
+  localStorage.setItem("item","Apple iphone X");
+}
+
+function deliveryTwo(){
+  localStorage.setItem("uid", "6652");
+  localStorage.setItem("uname","Suresh");
+  localStorage.setItem("email","winwithaman@gmail.com");
+  localStorage.setItem("phoneno","8165723478");
+  localStorage.setItem("address","75, 9th Cross, 2nd Main, Banashankari 3rd Stage, Bangalore-560085");
+  localStorage.setItem("item","MI Power Bank");
+}
+
+function deliveryThree(){
+  localStorage.setItem("uid", "2546");
+  localStorage.setItem("uname","Ramesh");
+  localStorage.setItem("email","connectamanulla@gmail.com");
+  localStorage.setItem("phoneno","6363578861");
+  localStorage.setItem("address","102 1st floor, Square Apartment, Bangalore-560063");
+  localStorage.setItem("item","USB Cable");
+}
+
+function deliveryFour(){
+  localStorage.setItem("uid", "9785");
+  localStorage.setItem("uname","Lokesh");
+  localStorage.setItem("email","connectakashpr@gmail.com");
+  localStorage.setItem("phoneno","9620128963");
+  localStorage.setItem("address","24, 1st Block, Shivaginagar, Bangalore-560060");
+  localStorage.setItem("item","BOAT Bluetooth Earphones");
+}
+
+</script>
+
+</html>
